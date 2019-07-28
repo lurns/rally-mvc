@@ -14,4 +14,10 @@ public class UserController {
         return "index";
     }
 
+    @RequestMapping("login")
+    public String login(Model model) {
+        model.addAttribute("title", "Log in to Rally");
+        return "login";
+    }
+
 }

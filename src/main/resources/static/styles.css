@@ -10,8 +10,8 @@ h1 {
     font-weight: 900;
 }
 
-.signup {
-    width: 80%;
+.signup, .login {
+    width: 85%;
     margin: 0 auto;
     margin-top: 50px;
     background-color: #fff;
@@ -20,7 +20,7 @@ h1 {
     padding: 25px;
 }
 
-.signup h1 {
+.signup h1, .login h1 {
     color: #FA5A60;
 }
 
@@ -28,4 +28,9 @@ h1 {
     font-weight: 700;
     color: #1a7e8a;
     margin-top: 80px;
+}
+
+.rally-info ul {
+    margin: 0;
+    padding-left: 20px;
 }
