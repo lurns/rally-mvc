@@ -20,6 +20,11 @@ h1 {
     padding: 25px;
 }
 
+.error {
+    color: #FA5A60;
+    font-size: .7em;
+}
+
 .signup h1, .login h1 {
     color: #FA5A60;
 }

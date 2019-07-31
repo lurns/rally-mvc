@@ -2,28 +2,33 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 
+
 <body class="container">
 <div class="container">
         <div class="signup row">
             <div class="col-md-6 col-lg-7">
                 <h1 th:text="${title}"></h1>
-                <p th:unless="${duplicate}"></p>
                 <form method="post" th:object="${user}" id="signup-form">
                     <div class="form-group">
                         <label th:for="Nickname">Nickname</label>
                         <input type="text" class="form-control" th:field="*{nickname}" />
+                        <span th:errors="*{nickname}" class="error"></span>
                     </div>
                     <div class="form-group">
                         <label th:for="email">Email</label>
                         <input type="email" class="form-control" th:field="*{email}" />
+                        <span th:errors="*{email}" class="error"></span>
+                        <span th:text="${duplicate}" class="error"></span>
                     </div>
                     <div class="form-group">
                         <label th:for="email">Password</label>
                         <input type="password" class="form-control" th:field="*{password}" />
+                        <span th:errors="*{password}" class="error"></span>
                     </div>
                     <div class="form-group">
-                        <label th:for="verify-pass">Verify Password</label>
-                        <input type="password" class="form-control" th:field="*{verifyPass}" />
+                        <label th:for="verifyPass">Verify Password</label>
+                        <input type="password" class="form-control" th:name="verifyPass" />
+                        <span th:text="${verifyPass}" class="error"></span>
                     </div>
                     <input type="submit" class="btn btn-info" value="Register" />
                 </form>
