@@ -69,26 +69,43 @@ public class UserController {
 
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public String login(Model model) {
+        User checkUser = new User();
+
+        model.addAttribute("user", checkUser);
         model.addAttribute("title", "Log in to Rally");
         return "login";
     }
 
-    //TODO: user login
-    public String processLogin(Model model, @Valid User user, Errors errors,
+    @RequestMapping(value = "login", method = RequestMethod.POST)
+    public String processLogin(Model model, @Valid User checkUser, Errors errors,
                                HttpServletRequest request) {
 
-
-        HttpSession session = request.getSession();
-        session.setAttribute("user", user);
-
-        return "redirect:/dashboard";
+        //check if user exists
+        boolean exists = false;
+        User existingUser = userDao.findByEmail(checkUser.getEmail());
+        if (existingUser != null) {
+            exists = true;
+            if (checkUser.getPassword().equals(existingUser.getPassword())) {
+                HttpSession session = request.getSession();
+                session.setAttribute("user", existingUser);
+                return "redirect:/dashboard";
+            } else {
+                model.addAttribute("title", "Log in to Rally");
+                model.addAttribute("invalid","Invalid password.");
+                return "login";
+            }
+        } else {
+            model.addAttribute("title", "Log in to Rally");
+            model.addAttribute("none", "No user associated with that e-mail.");
+            return "login";
+        }
 
     }
 
+    @RequestMapping(value = "logout", method = RequestMethod.GET)
     public String logout(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.invalidate();
-
         return "index";
     }
 

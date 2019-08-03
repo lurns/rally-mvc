@@ -12,23 +12,23 @@
                     <div class="form-group">
                         <label th:for="Nickname">Nickname</label>
                         <input type="text" class="form-control" th:field="*{nickname}" />
-                        <span th:errors="*{nickname}" class="error"></span>
+                        <p th:errors="*{nickname}" class="error"></p>
                     </div>
                     <div class="form-group">
                         <label th:for="email">Email</label>
                         <input type="email" class="form-control" th:field="*{email}" />
-                        <span th:errors="*{email}" class="error"></span>
-                        <span th:text="${duplicate}" class="error"></span>
+                        <p th:errors="*{email}" class="error"></p>
+                        <p th:text="${duplicate}" class="error"></p>
                     </div>
                     <div class="form-group">
                         <label th:for="email">Password</label>
                         <input type="password" class="form-control" th:field="*{password}" />
-                        <span th:errors="*{password}" class="error"></span>
+                        <p th:errors="*{password}" class="error"></p>
                     </div>
                     <div class="form-group">
                         <label th:for="verifyPass">Verify Password</label>
                         <input type="password" class="form-control" th:name="verifyPass" />
-                        <span th:text="${verifyPass}" class="error"></span>
+                        <p th:text="${verifyPass}" class="error"></p>
                     </div>
                     <input type="submit" class="btn btn-info" value="Register" />
                 </form>

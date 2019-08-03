@@ -10,6 +10,28 @@ h1 {
     font-weight: 900;
 }
 
+nav {
+    background-color: #087e8b;
+    box-shadow: #a0a0a0 0px 5px 3px;
+    color: #fff;
+}
+
+nav a {
+    color: #fff;
+}
+
+nav a:hover {
+    color: #419d78;
+}
+
+nav a .navbar-brand {
+    font-weight: 700;
+}
+
+nav span {
+    color: #f2af29;
+}
+
 .signup, .login {
     width: 85%;
     margin: 0 auto;
