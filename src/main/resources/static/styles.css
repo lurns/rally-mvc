@@ -28,7 +28,7 @@ nav a .navbar-brand {
     font-weight: 700;
 }
 
-nav span {
+.navbar .nav-user {
     color: #f2af29;
 }
 

@@ -106,13 +106,18 @@ public class UserController {
     public String logout(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.invalidate();
-        return "index";
+        return "redirect:/";
     }
 
     @RequestMapping(value="dashboard", method=RequestMethod.GET)
     public String dashboard(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
+
+        /*if no user, redirect to home*/
+        if (session.getAttribute("user") == null) {
+            return "redirect:/";
+        }
 
         model.addAttribute("user", user);
         return "dashboard";
