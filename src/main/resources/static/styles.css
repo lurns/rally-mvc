@@ -6,6 +6,10 @@ body, html {
     color: #3C3C3C;
 }
 
+body a, a:hover {
+    color: #419d78;
+}
+
 h1 {
     font-weight: 900;
 }
