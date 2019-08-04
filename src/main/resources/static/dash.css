@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito:200,400,700,900&display=swap');
+
+body, html {
+    font-family: Nunito, sans-serif;
+    background-color: #3C3C3C;
+    color: #fff;
+}
+
+body a, a:hover {
+    color: #419d78;
+    text-decoration: none;
+}
+
+h1 {
+    font-weight: 900;
+    color: #f2af29;
+}
+
+nav {
+    background-color: #087e8b;
+    box-shadow: #a0a0a0 0px 5px 3px;
+    color: #fff;
+}
+
+nav a {
+    color: #fff;
+}
+
+nav a:hover {
+    color: #419d78;
+}
+
+nav a .navbar-brand {
+    font-weight: 700;
+}
+
+.navbar .nav-user {
+    color: #f2af29;
+}
+
+.dash {
+    margin: 0 auto;
+    padding-top: 3%;
+}
+
+.user-stats {
+    padding: 20px;
+}
+
+.add-stuff {
+    border-left: #f2af29 1px solid;
+    padding: 20px;
+}
+
+.table {
+    margin-top: 3%;
+    color: #fff;
+}
+
+.table tr th {
+    font-weight: 700;
+    border-top: 0px;
+}
+
+.table tr td {
+    border-top: #f2af29 1px solid;
+    padding-top: 15px;
+}
+
+.light {
+    font-size: .8em;
+    font-weight: 200;
+}
+
+.table tr td .delete-item {
+    font-size: .8em;
+    color: #ff5a5f;
+}
+
+.table tr td .edit-item {
+    font-size: .8em;
+}

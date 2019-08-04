@@ -15,9 +15,9 @@
 
     <tr th:each="message : ${messages}">
         <td th:text="${message.msg}"></td>
-        <td th:text="${message.msg_type.name}"></td>
-        <td th:text="${#dates.format(message.date, 'dd-MMM-yyyy')}"></td>
-        <td><a href="edit.html">edit</a> | <a href="delete.html">delete</a></td>
+        <td class="light" th:text="${message.msg_type.name}"></td>
+        <td class="light" th:text="${#dates.format(message.date, 'dd-MMM-yyyy')}"></td>
+        <td><a href="edit.html" class="edit-item">edit</a>&emsp;&emsp;<a href="delete.html" class="delete-item">delete</a></td>
     </tr>
 </table>
 </div>
