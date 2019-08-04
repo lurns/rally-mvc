@@ -8,11 +8,14 @@
     <div class="dash row">
         <div class="user-stats">
             <h1>Hi there, <span th:text="${user.nickname}"></span></h1>
+            <div class="user-pic-main mx-auto img-fluid">
+
+            </div>
+            <p class="text-center"><a href="">Upload new profile photo</a></p>
         </div>
         <div class="add-stuff">
             <div class="add-message">
-                <h3>Add new message</h3>
-                <a href="/messages">view messages</a>
+                <h3>Add new message&emsp;<span><a href="/messages" class="view-item">view messages</a></span></h3>
                 <form method="post" th:object="${message}" id="message-form">
                     <div class="form-group">
                         <label th:for="message">Message</label>
@@ -20,7 +23,7 @@
                         <p th:errors="*{msg}" class="error"></p>
                     </div>
                     <div class="form-group">
-                        <label th:for="msg_type">Type</label>
+                        <label th:for="msg_type">Type</label><br/>
                         <select th:field="*{msg_type}">
                             <option th:each="type : ${messageType}"
                             th:text="${type.name}"
@@ -33,7 +36,7 @@
                 </form>
             </div>
             <div class="add-workout">
-                <h3>Add Workout</h3>
+                <h3>Add Workout&emsp;<span><a href="/workouts" class="view-item">view workouts</a></span></h3>
             </div>
         </div>
 
