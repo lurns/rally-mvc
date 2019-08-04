@@ -8,6 +8,7 @@ body, html {
 
 body a, a:hover {
     color: #419d78;
+    text-decoration: none;
 }
 
 h1 {
@@ -64,4 +65,12 @@ nav a .navbar-brand {
 .rally-info ul {
     margin: 0;
     padding-left: 20px;
+}
+
+.dash {
+    background-color: #3C3C3C;
+}
+
+.add-stuff {
+    border-left: #f2af29 1px solid;
 }

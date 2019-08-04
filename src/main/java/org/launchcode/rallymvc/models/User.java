@@ -33,7 +33,7 @@ public class User {
 
     /*Mappings*/
     @OneToMany
-    @JoinColumn(name = "message_id")
+    @JoinColumn(name = "user_id")
     private List<Message> messages = new ArrayList<>();
 
     @OneToMany

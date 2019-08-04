@@ -1,7 +1,11 @@
 package org.launchcode.rallymvc.controllers;
 
 
+import org.launchcode.rallymvc.models.Message;
 import org.launchcode.rallymvc.models.User;
+import org.launchcode.rallymvc.models.Workout;
+import org.launchcode.rallymvc.models.data.MessageDao;
+import org.launchcode.rallymvc.models.data.MessageType;
 import org.launchcode.rallymvc.models.data.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +25,9 @@ public class UserController {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private MessageDao messageDao;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(Model model) {
@@ -119,7 +126,13 @@ public class UserController {
             return "redirect:/";
         }
 
+        Message message = new Message();
+        //Workout workout = new Workout();
+
         model.addAttribute("user", user);
+        model.addAttribute("message", message);
+        model.addAttribute("messageType", MessageType.values());
+        //model.addAttribute("workout", workout);
         return "dashboard";
     }
 

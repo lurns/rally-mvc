@@ -1,6 +1,7 @@
 package org.launchcode.rallymvc.models;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.launchcode.rallymvc.models.data.MessageType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -20,9 +21,8 @@ public class Message {
     private String msg;
 
     @NotNull
-    private String msg_type;
+    private MessageType msg_type;
 
-    @NotNull
     private GregorianCalendar date;
 
     /*Mappings*/
@@ -46,11 +46,11 @@ public class Message {
         this.msg = msg;
     }
 
-    public String getMsg_type() {
+    public MessageType getMsg_type() {
         return msg_type;
     }
 
-    public void setMsg_type(String msg_type) {
+    public void setMsg_type(MessageType msg_type) {
         this.msg_type = msg_type;
     }
 
