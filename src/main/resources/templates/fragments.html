@@ -25,23 +25,29 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/dashboard">Dashboard</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/messages">Messages</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Workouts</a>
-            </li>
-            <li class="nav-item">
-                <span class="navbar-text nav-user" th:text="${user.nickname}"></span>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="logout">Log out</a>
-            </li>
-        </ul>
+        <div>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/messages">Messages</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Workouts</a>
+                </li>
+            </ul>
+        </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <span class="navbar-text nav-user" th:text="${user.nickname}"></span>
+                </li>&emsp;
+                <li class="nav-item">
+                    <a class="nav-link" href="logout">Log out</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
 
