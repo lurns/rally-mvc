@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: dash-head"></head>
+
+<body>
+<nav th:replace="fragments :: navigation"></nav>
+<div class="container">
+<table class="table">
+    <tr>
+        <th>Message</th>
+        <th>Type</th>
+        <th>Date</th>
+        <th></th>
+    </tr>
+
+    <tr th:each="message : ${messages}">
+        <td th:text="${message.msg}"></td>
+        <td th:text="${message.msg_type.name}"></td>
+        <td th:text="${#dates.format(message.date, 'dd-MMM-yyyy')}"></td>
+        <td><a href="edit.html">edit</a> | <a href="delete.html">delete</a></td>
+    </tr>
+</table>
+</div>
+<div th:replace="fragments :: scripts"></div>
+</body>
+</html>

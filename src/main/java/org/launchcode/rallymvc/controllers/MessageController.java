@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 @Controller
 public class MessageController {
@@ -43,6 +45,19 @@ public class MessageController {
             return "dashboard";
         }
 
+    }
+
+    @RequestMapping(value = "messages", method = RequestMethod.GET)
+    public String viewMessages(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+
+        Iterable<Message> userMessages = messageDao.findByUserId(user.getId());
+
+        model.addAttribute("title", user.getNickname() + "'s Messages");
+        model.addAttribute("user", user);
+        model.addAttribute("messages", userMessages);
+        return "messages";
     }
 
 }
