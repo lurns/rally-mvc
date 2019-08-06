@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -53,10 +54,16 @@ public class MessageController {
         User user = (User) session.getAttribute("user");
 
         Iterable<Message> userMessages = messageDao.findByUserId(user.getId());
+        ArrayList<Message> sortMessage = new ArrayList<>();
+        for (Message message : userMessages) {
+            sortMessage.add(message);
+        }
+
+        Collections.reverse(sortMessage);
 
         model.addAttribute("title", user.getNickname() + "'s Messages");
         model.addAttribute("user", user);
-        model.addAttribute("messages", userMessages);
+        model.addAttribute("messages", sortMessage);
         return "messages";
     }
 

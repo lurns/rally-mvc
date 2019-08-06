@@ -54,6 +54,9 @@ nav a .navbar-brand {
     background-color: #087e8b;
     display: block;
     margin: 20px 0px;
+    text-align: center;
+    padding-top: 25%;
+    font-size: 2em;
 }
 
 .add-stuff {
