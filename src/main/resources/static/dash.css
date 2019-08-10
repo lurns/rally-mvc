@@ -96,8 +96,15 @@ nav a .navbar-brand {
 .table tr td .delete-item {
     font-size: .8em;
     color: #ff5a5f;
+    text-decoration: none;
 }
 
 .table tr td .edit-item {
     font-size: .8em;
+    color: #419d78;
+    text-decoration: none;
+}
+
+.view-buttons {
+    display: inline;
 }

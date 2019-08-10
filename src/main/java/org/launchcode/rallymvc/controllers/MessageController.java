@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -53,6 +55,11 @@ public class MessageController {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 
+        /*if no user, redirect to home*/
+        if (session.getAttribute("user") == null) {
+            return "redirect:/login";
+        }
+
         Iterable<Message> userMessages = messageDao.findByUserId(user.getId());
         ArrayList<Message> sortMessage = new ArrayList<>();
         for (Message message : userMessages) {
@@ -65,6 +72,20 @@ public class MessageController {
         model.addAttribute("user", user);
         model.addAttribute("messages", sortMessage);
         return "messages";
+    }
+
+    @RequestMapping(value = "messages/delete", method = RequestMethod.POST)
+    public String delMessage(@RequestParam int id, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+
+        /*if no user, redirect to home*/
+        if (session.getAttribute("user") == null) {
+            return "redirect:/login";
+        }
+
+        messageDao.delete(id);
+        return "redirect:/messages";
     }
 
 }
