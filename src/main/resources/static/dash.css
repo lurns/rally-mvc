@@ -61,8 +61,16 @@ nav a .navbar-brand {
 
 .user-pic-main {
     border-radius: 50%;
+    width: 200px;
+    height: 200px;
     text-align: center;
     margin: 10px;
+    overflow: hidden;
+}
+
+.user-pic-main-display {
+    display: block;
+    width: 100%;
 }
 
 .custom-file {
