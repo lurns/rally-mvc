@@ -15,10 +15,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
 @Controller
 public class UserController {
@@ -28,6 +32,8 @@ public class UserController {
 
     @Autowired
     private MessageDao messageDao;
+
+    //home & registration
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(Model model) {
@@ -74,6 +80,8 @@ public class UserController {
         return "redirect:/dashboard";
     }
 
+    //login
+
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public String login(Model model) {
         User checkUser = new User();
@@ -109,12 +117,16 @@ public class UserController {
 
     }
 
+    //logout
+
     @RequestMapping(value = "logout", method = RequestMethod.GET)
     public String logout(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.invalidate();
         return "redirect:/";
     }
+
+    //dashboard get
 
     @RequestMapping(value="dashboard", method=RequestMethod.GET)
     public String dashboard(Model model, HttpServletRequest request) {
@@ -135,5 +147,6 @@ public class UserController {
         //model.addAttribute("workout", workout);
         return "dashboard";
     }
+
 
 }

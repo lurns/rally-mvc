@@ -47,7 +47,7 @@ nav a .navbar-brand {
     padding: 20px;
 }
 
-.user-pic-main {
+.user-pic-default {
     border-radius: 50%;
     width: 200px;
     height: 200px;
@@ -55,8 +55,37 @@ nav a .navbar-brand {
     display: block;
     margin: 20px 0px;
     text-align: center;
-    padding-top: 25%;
+    padding: 80px 0;
     font-size: 2em;
+}
+
+.user-pic-main {
+    border-radius: 50%;
+    text-align: center;
+    margin: 10px;
+}
+
+.custom-file {
+    width: 200px;
+}
+
+.custom-file-label {
+    text-align: left;
+}
+
+.upload-button {
+    text-decoration: none;
+    background-color: #419d78;
+    border: 0px;
+    color: #fff;
+    margin: 20px;
+}
+
+.upload-button:hover {
+    text-decoration: none;
+    background-color: #087e8b;
+    border: 0px;
+    color: #fff;
 }
 
 .add-stuff {
