@@ -1,5 +1,5 @@
-# Project Outine
-For this assign### Overview
+# Project Outline
+### Overview
 There’s always that little voice telling you that you should work out, but what if there was an app to help shame you into it? Users will upload a photo of themselves to be used with their own words of encouragement to help them reach their goal. Speech bubbles with the user’s profile photo will pop up when the user is slacking or succeeding. I plan to have a few different options for users to input their self-motivating words--”Remember when you said <user input>”, “Don’t forget <user input>”, etc. It’s a combination of Mad Libs and a workout log. Personally, whenever I have an app (with or without a cute mascot) reminding me to do something, it doesn’t do as much for me as my past self yelling at me might.
 
 ### Features
