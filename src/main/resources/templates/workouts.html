@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: dash-head"></head>
+
+<body>
+<nav th:replace="fragments :: navigation"></nav>
+<div class="container">
+    <table class="table">
+        <tr>
+            <th>Workout</th>
+            <th>Time</th>
+            <th>Date</th>
+            <th></th>
+        </tr>
+
+        <tr th:each="workout : ${workouts}">
+            <td th:text="${workout.type}"></td>
+            <td class="light" th:text="${workout.time}"></td>
+            <td class="light" th:text="${#dates.format(workout.date, 'dd-MMM-yyyy')}"></td>
+            <td><form method="post" class="view-buttons">
+                <input type="submit" class="btn btn-link btn-sm edit-item" value="edit"/>
+            </form>&emsp;&emsp;
+                <form th:action="@{workouts/delete}" method="post" class="view-buttons">
+                    <input type="hidden" name="id" th:value="${workout.id}"/>
+                    <input type="submit" class="btn btn-link btn-sm delete-item" value="delete"/>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+<div th:replace="fragments :: scripts"></div>
+</body>
+</html>

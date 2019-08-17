@@ -7,6 +7,7 @@ import org.launchcode.rallymvc.models.Workout;
 import org.launchcode.rallymvc.models.data.MessageDao;
 import org.launchcode.rallymvc.models.data.MessageType;
 import org.launchcode.rallymvc.models.data.UserDao;
+import org.launchcode.rallymvc.models.data.WorkoutDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,7 @@ import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 @Controller
 public class UserController {
@@ -32,6 +34,9 @@ public class UserController {
 
     @Autowired
     private MessageDao messageDao;
+
+    @Autowired
+    private WorkoutDao workoutDao;
 
     //home & registration
 
@@ -140,6 +145,13 @@ public class UserController {
 
         Message message = new Message();
         Workout workout = new Workout();
+
+        ArrayList<Workout> userWorkouts = Workout.sortWorkouts(workoutDao, user);
+
+        if (userWorkouts.size() != 0) {
+            Workout recentWorkout = userWorkouts.get(0);
+            model.addAttribute("recentWorkout", recentWorkout);
+        }
 
         model.addAttribute("user", user);
         model.addAttribute("message", message);

@@ -96,6 +96,15 @@ nav a .navbar-brand {
     color: #fff;
 }
 
+.recent-workout {
+    margin-top: 35px;
+}
+
+.highlight {
+    font-weight: 700;
+    color: #f2af29;
+}
+
 .add-stuff {
     border-left: #f2af29 1px solid;
     padding: 20px;
