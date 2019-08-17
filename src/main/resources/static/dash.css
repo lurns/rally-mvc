@@ -110,7 +110,36 @@ nav a .navbar-brand {
     padding-bottom: 20px;
 }
 
-.add-button {
+.range-field {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 5px;
+    border-radius: 5px;
+    background: rgb(148, 148, 148);
+    outline: none;
+}
+
+.range-field::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #419d78;
+    cursor: pointer;
+}
+
+.range-field::-moz-range-thumb {
+    height: 15px;
+    border-radius: 50%;
+    background: #419d78;
+    cursor: pointer;
+}
+
+#timeOutputId {
+    padding: 10px 0 0 0;
+}
+
+.add-button-message {
     align-self: flex-end;
     margin-top: 30px;
 }

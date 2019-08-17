@@ -139,12 +139,12 @@ public class UserController {
         }
 
         Message message = new Message();
-        //Workout workout = new Workout();
+        Workout workout = new Workout();
 
         model.addAttribute("user", user);
         model.addAttribute("message", message);
         model.addAttribute("messageType", MessageType.values());
-        //model.addAttribute("workout", workout);
+        model.addAttribute("workout", workout);
         return "dashboard";
     }
 

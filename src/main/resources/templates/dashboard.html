@@ -45,13 +45,29 @@
                             <p th:errors="*{msg_type}" class="error"></p>
                             <p th:text="${status}" class="error"></p>&emsp;&emsp;
                             <div class="form-group form-inline">
-                                <input type="submit" class="form-control btn btn-outline-info add-button" value="Add" />
+                                <input type="submit" class="form-control btn btn-outline-info add-button-message" value="Add" />
                             </div>
                         </div>
                 </form>
             </div>
             <div class="add-workout">
                 <h3>Add Workout&emsp;<span><a href="/workouts" class="view-item">view workouts</a></span></h3>
+                <form method="post" action="?workout-form" th:object="${workout}" id="workout-form">
+                    <div class="form-group">
+                        <label th:for="type">Workout Type</label>
+                        <input type="text" class="form-control" th:field="*{type}" />
+                        <p th:errors="*{type}" class="error"></p>
+                    </div>
+                    <div class="form-group">
+                        <label th:for="time">Time</label>
+                        <input type="range" class="form-control-range range-field" th:field="*{time}" min="1" max="180"
+                        th:value="time.value" oninput="timeOutputId.value = time.value"/><output id="timeOutputId"></output>
+                        <p th:error="*{time}" class="error"></p>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="form-control btn btn-outline-info" value="Add" />
+                    </div>
+                </form>
             </div>
         </div>
 

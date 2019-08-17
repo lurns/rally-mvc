@@ -37,7 +37,7 @@ public class User {
     private List<Message> messages = new ArrayList<>();
 
     @OneToMany
-    @JoinColumn(name = "workout_id")
+    @JoinColumn(name = "user_id")
     private List<Workout> workouts = new ArrayList<>();
 
     /*Methods, Getters, Setters*/

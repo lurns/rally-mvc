@@ -9,4 +9,5 @@ import javax.transaction.Transactional;
 @Repository
 @Transactional
 public interface WorkoutDao extends CrudRepository<Workout, Integer> {
+    public Iterable<Workout> findByUserId(Integer user_id);
 }

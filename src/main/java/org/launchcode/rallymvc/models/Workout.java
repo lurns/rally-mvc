@@ -1,6 +1,7 @@
 package org.launchcode.rallymvc.models;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,11 +23,10 @@ public class Workout {
     @Size(max=50)
     private String type;
 
-    @NotNull
     private GregorianCalendar date;
 
     @NotNull
-    @NotEmpty
+    @Range(min=1,max=180)
     private int time;
 
     /*Mappings*/
