@@ -8,6 +8,7 @@
     <div class="dash row">
         <div class="user-stats">
             <h1>Hi there, <span th:text="${user.nickname}"></span></h1>
+            <p th:text="${currentMessage.msg}"></p>
             <div th:unless="${user.pic}" class="user-pic-default mx-auto img-fluid">
                 <span th:unless="${user.pic}" th:text="${user.nickname}"></span>
             </div>
@@ -65,7 +66,15 @@
                     <div class="form-group">
                         <label th:for="time">Time (minutes)</label>
                         <input type="range" class="form-control-range range-field" th:field="*{time}" min="1" max="180"
-                        th:value="time.value" oninput="timeOutputId.value = time.value"/><output id="timeOutputId"></output>
+                        th:value="time.value" oninput="timeOutputId.value = time.value" list="range-number"/>
+                        <datalist id="range-number">
+                            <option>30</option>
+                            <option>60</option>
+                            <option>90</option>
+                            <option>120</option>
+                            <option>150</option>
+                        </datalist>
+                        <output id="timeOutputId"></output>
                         <p th:error="*{time}" class="error"></p>
                     </div>
                     <div class="form-group">

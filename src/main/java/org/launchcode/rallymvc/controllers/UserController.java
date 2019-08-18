@@ -24,7 +24,11 @@ import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -148,9 +152,29 @@ public class UserController {
 
         ArrayList<Workout> userWorkouts = Workout.sortWorkouts(workoutDao, user);
 
+        Iterable<Message> getMessages = messageDao.findByUserId(user.getId());
+        ArrayList<Message> userMessages = new ArrayList<>();
+
+        for (Message eachMessage : getMessages) {
+            userMessages.add(eachMessage);
+        }
+
         if (userWorkouts.size() != 0) {
             Workout recentWorkout = userWorkouts.get(0);
             model.addAttribute("recentWorkout", recentWorkout);
+
+            //message display logic
+
+            //get current time
+            LocalDateTime today = LocalDateTime.now();
+            //find disparity from current time and last workout
+            
+
+            //display message appropriate according to disparity
+                //discrepancy < 12, congrats
+                //discrepancy btwn 12 - 24, motivats
+                //discrepancy > 24 berats
+            model.addAttribute("currentMessage", userMessages.get(0));
         }
 
         model.addAttribute("user", user);
