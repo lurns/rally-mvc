@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 @Controller
@@ -34,7 +34,7 @@ public class MessageController {
         User user = (User) session.getAttribute("user");
 
         if (!errors.hasErrors()) {
-            GregorianCalendar cal = new GregorianCalendar();
+            LocalDateTime cal = LocalDateTime.now();
             message.setDate(cal);
             message.setUser(user);
             messageDao.save(message);

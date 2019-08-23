@@ -6,7 +6,8 @@ import org.launchcode.rallymvc.models.data.MessageType;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.GregorianCalendar;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 public class Message {
@@ -23,7 +24,7 @@ public class Message {
     @NotNull
     private MessageType msg_type;
 
-    private GregorianCalendar date;
+    private Timestamp date;
 
     /*Mappings*/
     @ManyToOne
@@ -54,12 +55,12 @@ public class Message {
         this.msg_type = msg_type;
     }
 
-    public GregorianCalendar getDate() {
-        return date;
+    public LocalDateTime getDate() {
+        return date.toLocalDateTime();
     }
 
-    public void setDate(GregorianCalendar date) {
-        this.date = date;
+    public void setDate(LocalDateTime date) {
+        this.date = Timestamp.valueOf(date);
     }
 
     public User getUser() {

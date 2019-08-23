@@ -16,7 +16,7 @@
     <tr th:each="message : ${messages}">
         <td th:text="${message.msg}"></td>
         <td class="light" th:text="${message.msg_type.name}"></td>
-        <td class="light" th:text="${#dates.format(message.date, 'dd-MMM-yyyy')}"></td>
+        <td class="light" th:text="${message.date.toLocalDate()}"></td>
         <td><form method="post" class="view-buttons">
             <input type="submit" class="btn btn-link btn-sm edit-item" value="edit"/>
             </form>&emsp;&emsp;

@@ -10,9 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.GregorianCalendar;
+import java.sql.Timestamp;
 
 @Entity
 public class Workout {
@@ -26,7 +27,7 @@ public class Workout {
     @Size(max=50)
     private String type;
 
-    private GregorianCalendar date;
+    private Timestamp date;
 
     @NotNull
     @Range(min=1,max=180)
@@ -53,12 +54,12 @@ public class Workout {
         this.type = type;
     }
 
-    public GregorianCalendar getDate() {
-        return date;
+    public LocalDateTime getDate() {
+        return date.toLocalDateTime();
     }
 
-    public void setDate(GregorianCalendar date) {
-        this.date = date;
+    public void setDate(LocalDateTime date) {
+        this.date = Timestamp.valueOf(date);
     }
 
     public int getTime() {

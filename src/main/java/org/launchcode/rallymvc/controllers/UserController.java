@@ -16,19 +16,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
-import java.util.List;
 
 @Controller
 public class UserController {
@@ -168,13 +162,70 @@ public class UserController {
             //get current time
             LocalDateTime today = LocalDateTime.now();
             //find disparity from current time and last workout
-            
+            long difference = recentWorkout.getDate().until(today, ChronoUnit.HOURS);
+            System.out.println(difference);
+            Message currentMessage = new Message();
 
-            //display message appropriate according to disparity
-                //discrepancy < 12, congrats
-                //discrepancy btwn 12 - 24, motivats
-                //discrepancy > 24 berats
-            model.addAttribute("currentMessage", userMessages.get(0));
+            //fix random message logic. why does chunky work and not lurns?
+            if (difference <= 12) {
+                ArrayList<Message> congrats = new ArrayList<>();
+                for (Message eachMessage : userMessages) {
+                    if (eachMessage.getMsg_type() == MessageType.CONGRATULATE) {
+                        congrats.add(eachMessage);
+                    }
+                }
+
+                if (congrats.size() > 0) {
+                    int random = 0;
+                    currentMessage = congrats.get(random);
+                } else {
+                    currentMessage.setMsg_type(MessageType.CONGRATULATE);
+                    currentMessage.setMsg("Looks like you need to add more messages!");
+                    currentMessage.setDate(today);
+                    currentMessage.setUser(user);
+                }
+            } else if (difference < 24 && difference > 12) {
+                ArrayList<Message> motivats = new ArrayList<>();
+                for (Message eachMessage : userMessages) {
+                    if (eachMessage.getMsg_type() == MessageType.MOTIVATE) {
+                        motivats.add(eachMessage);
+                    }
+                }
+
+                if (motivats.size() > 0) {
+                    int random = 0;
+                    currentMessage = motivats.get(random);
+                } else {
+                    currentMessage.setMsg_type(MessageType.MOTIVATE);
+                    currentMessage.setMsg("Looks like you need to add more messages!");
+                    currentMessage.setDate(today);
+                    currentMessage.setUser(user);
+                }
+            } else if (difference >= 24) {
+                ArrayList<Message> berats = new ArrayList<>();
+                for (Message eachMessage : userMessages) {
+                    if (eachMessage.getMsg_type() == MessageType.BERATE) {
+                        berats.add(eachMessage);
+                    }
+                }
+
+                if (berats.size() > 0) {
+                    int random = 0;
+                    currentMessage = berats.get(random);
+                } else {
+                    currentMessage.setMsg_type(MessageType.BERATE);
+                    currentMessage.setMsg("Looks like you need to add more messages!");
+                    currentMessage.setDate(today);
+                    currentMessage.setUser(user);
+                }
+            } else {
+                currentMessage.setMsg_type(MessageType.CONGRATULATE);
+                currentMessage.setMsg("Looks like you need to add more messages!");
+                currentMessage.setDate(today);
+                currentMessage.setUser(user);
+            }
+            System.out.println(currentMessage.getId());
+            model.addAttribute("currentMessage", currentMessage);
         }
 
         model.addAttribute("user", user);
