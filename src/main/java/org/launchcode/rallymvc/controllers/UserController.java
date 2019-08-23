@@ -166,7 +166,6 @@ public class UserController {
             System.out.println(difference);
             Message currentMessage = new Message();
 
-            //fix random message logic. why does chunky work and not lurns?
             if (difference <= 12) {
                 ArrayList<Message> congrats = new ArrayList<>();
                 for (Message eachMessage : userMessages) {
@@ -175,12 +174,15 @@ public class UserController {
                     }
                 }
 
-                if (congrats.size() > 0) {
-                    int random = 0;
+                if (congrats.size() == 1) {
+                    currentMessage = congrats.get(0);
+                } else if (congrats.size() > 1) {
+                    int random = (int)(Math.random() * ((congrats.size() - 0) + 1)) + 0;
+                    System.out.println(random);
                     currentMessage = congrats.get(random);
                 } else {
                     currentMessage.setMsg_type(MessageType.CONGRATULATE);
-                    currentMessage.setMsg("Looks like you need to add more messages!");
+                    currentMessage.setMsg("I did the thing!");
                     currentMessage.setDate(today);
                     currentMessage.setUser(user);
                 }
@@ -192,12 +194,15 @@ public class UserController {
                     }
                 }
 
-                if (motivats.size() > 0) {
-                    int random = 0;
+                if (motivats.size() == 1) {
+                    currentMessage = motivats.get(0);
+                } else if (motivats.size() > 1) {
+                    int random = (int)(Math.random() * ((motivats.size() - 0) + 1)) + 0;
+                    System.out.println(random);
                     currentMessage = motivats.get(random);
                 } else {
                     currentMessage.setMsg_type(MessageType.MOTIVATE);
-                    currentMessage.setMsg("Looks like you need to add more messages!");
+                    currentMessage.setMsg("There's still time to get up and get out there!");
                     currentMessage.setDate(today);
                     currentMessage.setUser(user);
                 }
@@ -209,20 +214,18 @@ public class UserController {
                     }
                 }
 
-                if (berats.size() > 0) {
-                    int random = 0;
+                if (berats.size() == 1) {
+                    currentMessage = berats.get(0);
+                } else if (berats.size() > 1) {
+                    int random = (int)(Math.random() * ((berats.size() - 0) + 1)) + 0;
+                    System.out.println(random);
                     currentMessage = berats.get(random);
                 } else {
                     currentMessage.setMsg_type(MessageType.BERATE);
-                    currentMessage.setMsg("Looks like you need to add more messages!");
+                    currentMessage.setMsg("Lounging isn't exactly a workout, fam.");
                     currentMessage.setDate(today);
                     currentMessage.setUser(user);
                 }
-            } else {
-                currentMessage.setMsg_type(MessageType.CONGRATULATE);
-                currentMessage.setMsg("Looks like you need to add more messages!");
-                currentMessage.setDate(today);
-                currentMessage.setUser(user);
             }
             System.out.println(currentMessage.getId());
             model.addAttribute("currentMessage", currentMessage);
