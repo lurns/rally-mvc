@@ -177,7 +177,7 @@ public class UserController {
                 if (congrats.size() == 1) {
                     currentMessage = congrats.get(0);
                 } else if (congrats.size() > 1) {
-                    int random = (int)(Math.random() * ((congrats.size() - 0) + 1)) + 0;
+                    int random = (int)(Math.random() * ((congrats.size() - 1) + 1)) + 0;
                     System.out.println(random);
                     currentMessage = congrats.get(random);
                 } else {
@@ -197,7 +197,7 @@ public class UserController {
                 if (motivats.size() == 1) {
                     currentMessage = motivats.get(0);
                 } else if (motivats.size() > 1) {
-                    int random = (int)(Math.random() * ((motivats.size() - 0) + 1)) + 0;
+                    int random = (int)(Math.random() * ((motivats.size() - 1) + 1)) + 0;
                     System.out.println(random);
                     currentMessage = motivats.get(random);
                 } else {
@@ -217,7 +217,7 @@ public class UserController {
                 if (berats.size() == 1) {
                     currentMessage = berats.get(0);
                 } else if (berats.size() > 1) {
-                    int random = (int)(Math.random() * ((berats.size() - 0) + 1)) + 0;
+                    int random = (int)(Math.random() * ((berats.size() - 1) + 1)) + 0;
                     System.out.println(random);
                     currentMessage = berats.get(random);
                 } else {
