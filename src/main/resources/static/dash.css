@@ -194,3 +194,10 @@ nav a .navbar-brand {
 .view-buttons {
     display: inline;
 }
+
+footer {
+    bottom: 0px;
+    width: 100%;
+    text-align: center;
+    padding-top: 10px;
+}

@@ -4,9 +4,9 @@
 
 <body>
 <nav th:replace="fragments :: navigation"></nav>
-<div class="container">
+<div class="container-fluid">
     <div class="dash row">
-        <div class="user-stats">
+        <div class="user-stats col-md-4">
             <h1>Hi there, <span th:text="${user.nickname}"></span></h1>
             <p th:if="${currentMessage}" th:text="${currentMessage.msg}"></p>
             <div th:unless="${user.pic}" class="user-pic-default mx-auto img-fluid">
@@ -30,7 +30,7 @@
                 <p><span th:text="${recentWorkout.type}" class="highlight"></span> for <span th:text="${recentWorkout.time} + ' minutes'" class="highlight"></span></p>
             </div>
         </div>
-        <div class="add-stuff">
+        <div class="add-stuff col-md-8">
             <div class="add-message">
                 <h3>Add new message&emsp;<span><a href="/messages" class="view-item">view messages</a></span></h3>
                 <form method="post" th:object="${message}" id="message-form">
@@ -88,4 +88,5 @@
 </div>
 <div th:replace="fragments :: scripts"></div>
 </body>
+<footer th:replace="fragments :: footer"></footer>
 </html>
