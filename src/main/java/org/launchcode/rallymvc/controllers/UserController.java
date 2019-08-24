@@ -231,6 +231,7 @@ public class UserController {
             model.addAttribute("currentMessage", currentMessage);
         }
 
+        //defaults
         model.addAttribute("user", user);
         model.addAttribute("message", message);
         model.addAttribute("messageType", MessageType.values());
