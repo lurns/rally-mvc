@@ -1,5 +1,6 @@
 package org.launchcode.rallymvc.controllers;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.launchcode.rallymvc.models.Message;
 import org.launchcode.rallymvc.models.User;
 import org.launchcode.rallymvc.models.Workout;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -89,6 +92,24 @@ public class MessageController {
 
         messageDao.delete(id);
         return "redirect:/messages";
+    }
+
+    @RequestMapping(value = "messages/edit", method = RequestMethod.POST)
+    public String editMessage(@RequestParam int id, @RequestParam @NotEmpty @NotNull @Size(max = 300) String msg,
+                              @RequestParam @NotEmpty @NotNull MessageType msg_type, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        Message message = messageDao.findOne(id);
+        User messageUser = message.getUser();
+
+        //check message belongs to user
+        if (messageUser.getId() == user.getId()) {
+            message.setMsg(msg);
+            message.setMsg_type(msg_type);
+            messageDao.save(message);
+            return "redirect:/messages";
+        }
+        return "redirect:/dashboard";
     }
 
 }

@@ -32,14 +32,14 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form method="post" th:object="${message}" id="message-form">
+                            <form method="post" th:action="@{messages/edit}" th:object="${message}" th:id="${message}">
                                 <div class="form-group">
                                     <label th:for="msg">Message</label>
-                                    <input type="text" class="form-control" th:name="${msg}" th:value="${message.msg}"/>
+                                    <input type="text" class="form-control" name="msg" th:value="${message.msg}"/>
                                 </div>
                                 <div class="form-group">
                                     <label th:for="msg_type" class="col-form-label">Type
-                                        <select th:name="${msg_type}" class="form-control">
+                                        <select name="msg_type" class="form-control">
                                             <option th:each="type : ${messageType}"
                                                     th:text="${type.name}"
                                                     th:value="${type}"
@@ -48,6 +48,7 @@
                                     </label>
                                 </div>
                                 <div class="form-group">
+                                    <input type="hidden" name="id" th:value="${message.id}"/>
                                     <input type="submit" class="form-control btn btn-outline-info add-button-message" value="Edit" />
                                 </div>
                             </form>
