@@ -17,9 +17,49 @@
             <td th:text="${workout.type}"></td>
             <td class="light" th:text="${workout.time}"></td>
             <td class="light" th:text="${workout.date.toLocalDate()}"></td>
-            <td><form method="post" class="view-buttons">
-                <input type="submit" class="btn btn-link btn-sm edit-item" value="edit"/>
-            </form>&emsp;&emsp;
+            <td><button type="button" id="edit-workout-button" class="btn btn-link btn-sm edit-item" data-toggle="modal"
+                        th:attr="data-target='#edit-workout-modal'+${workout.id}">
+                edit
+            </button>
+                <!--Edit Modal-->
+                <div class="modal fade" th:id="'edit-workout-modal'+${workout.id}" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Edit Workout</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" th:action="@{workouts/edit}" th:object="${workout}" th:id="${workout}">
+                                    <div class="form-group">
+                                        <label th:for="type">Type</label>
+                                        <input type="text" class="form-control" name="type" th:value="${workout.type}"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label th:for="time">Time (minutes)</label>
+                                        <input type="range" class="form-control-range range-field" name="time" min="1" max="180"
+                                               th:value="${workout.time}" oninput="timeOutputId.value = time.value" list="range-number"/>
+                                        <datalist id="range-number">
+                                            <option>30</option>
+                                            <option>60</option>
+                                            <option>90</option>
+                                            <option>120</option>
+                                            <option>150</option>
+                                        </datalist>
+                                        <output id="timeOutputId"></output>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="hidden" name="id" th:value="${workout.id}"/>
+                                        <input type="submit" class="form-control btn btn-outline-info add-button-message" value="Edit" />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--delete-->&emsp;&emsp;
                 <form th:action="@{workouts/delete}" method="post" class="view-buttons">
                     <input type="hidden" name="id" th:value="${workout.id}"/>
                     <input type="submit" class="btn btn-link btn-sm delete-item" value="delete"/>

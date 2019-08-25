@@ -1,6 +1,8 @@
 package org.launchcode.rallymvc.controllers;
 
 import org.hibernate.jdbc.Work;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Range;
 import org.launchcode.rallymvc.models.Message;
 import org.launchcode.rallymvc.models.User;
 import org.launchcode.rallymvc.models.Workout;
@@ -19,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -86,5 +90,23 @@ public class WorkoutController {
 
         workoutDao.delete(id);
         return "redirect:/workouts";
+    }
+
+    @RequestMapping(value = "workouts/edit", method = RequestMethod.POST)
+    public String editWorkout(@RequestParam int id, @RequestParam @NotEmpty @NotNull @Size(max = 50) String type,
+                              @RequestParam @NotNull @Range(min=1,max=180) int time, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        Workout workout = workoutDao.findOne(id);
+        User workoutUser = workout.getUser();
+
+        //check message belongs to user
+        if (workoutUser.getId() == user.getId()) {
+            workout.setType(type);
+            workout.setTime(time);
+            workoutDao.save(workout);
+            return "redirect:/workouts";
+        }
+        return "redirect:/dashboard";
     }
 }
