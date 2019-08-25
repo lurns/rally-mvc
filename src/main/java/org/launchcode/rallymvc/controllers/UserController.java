@@ -163,7 +163,6 @@ public class UserController {
             LocalDateTime today = LocalDateTime.now();
             //find disparity from current time and last workout
             long difference = recentWorkout.getDate().until(today, ChronoUnit.HOURS);
-            System.out.println(difference);
             Message currentMessage = new Message();
 
             if (difference <= 12) {
@@ -178,7 +177,6 @@ public class UserController {
                     currentMessage = congrats.get(0);
                 } else if (congrats.size() > 1) {
                     int random = (int)(Math.random() * ((congrats.size() - 1) + 1)) + 0;
-                    System.out.println(random);
                     currentMessage = congrats.get(random);
                 } else {
                     currentMessage.setMsg_type(MessageType.CONGRATULATE);
@@ -198,7 +196,6 @@ public class UserController {
                     currentMessage = motivats.get(0);
                 } else if (motivats.size() > 1) {
                     int random = (int)(Math.random() * ((motivats.size() - 1) + 1)) + 0;
-                    System.out.println(random);
                     currentMessage = motivats.get(random);
                 } else {
                     currentMessage.setMsg_type(MessageType.MOTIVATE);
@@ -218,7 +215,6 @@ public class UserController {
                     currentMessage = berats.get(0);
                 } else if (berats.size() > 1) {
                     int random = (int)(Math.random() * ((berats.size() - 1) + 1)) + 0;
-                    System.out.println(random);
                     currentMessage = berats.get(random);
                 } else {
                     currentMessage.setMsg_type(MessageType.BERATE);
@@ -227,7 +223,6 @@ public class UserController {
                     currentMessage.setUser(user);
                 }
             }
-            System.out.println(currentMessage.getId());
             model.addAttribute("currentMessage", currentMessage);
         }
 

@@ -221,6 +221,15 @@ nav a .navbar-brand {
     display: inline;
 }
 
+#edit-message-modal {
+    color: #3C3C3C;
+}
+
+.modal-title {
+    font-weight: 700;
+    color: #419d78;
+}
+
 footer {
     bottom: 0px;
     width: 100%;

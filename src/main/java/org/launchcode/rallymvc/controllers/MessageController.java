@@ -73,6 +73,7 @@ public class MessageController {
         model.addAttribute("title", user.getNickname() + "'s Messages");
         model.addAttribute("user", user);
         model.addAttribute("messages", sortMessage);
+        model.addAttribute("messageType", MessageType.values());
         return "messages";
     }
 

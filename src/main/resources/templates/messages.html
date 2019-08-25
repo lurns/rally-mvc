@@ -17,9 +17,45 @@
         <td th:text="${message.msg}"></td>
         <td class="light" th:text="${message.msg_type.name}"></td>
         <td class="light" th:text="${message.date.toLocalDate()}"></td>
-        <td><form method="post" class="view-buttons">
-            <input type="submit" class="btn btn-link btn-sm edit-item" value="edit"/>
-            </form>&emsp;&emsp;
+        <td><button type="button" id="edit-message-button" class="btn btn-link btn-sm edit-item" data-toggle="modal"
+                    th:attr="data-target='#edit-message-modal'+${message.id}">
+            edit
+            </button>
+            <!--Edit Modal-->
+            <div class="modal fade" th:id="'edit-message-modal'+${message.id}" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Edit Message</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" th:object="${message}" id="message-form">
+                                <div class="form-group">
+                                    <label th:for="msg">Message</label>
+                                    <input type="text" class="form-control" th:name="${msg}" th:value="${message.msg}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label th:for="msg_type" class="col-form-label">Type
+                                        <select th:name="${msg_type}" class="form-control">
+                                            <option th:each="type : ${messageType}"
+                                                    th:text="${type.name}"
+                                                    th:value="${type}"
+                                                    th:selected="(${message.msg_type} == ${type})"></option>
+                                        </select>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" class="form-control btn btn-outline-info add-button-message" value="Edit" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--delete-->
             <form th:action="@{messages/delete}" method="post" class="view-buttons">
                 <input type="hidden" name="id" th:value="${message.id}"/>
             <input type="submit" class="btn btn-link btn-sm delete-item" value="delete"/>

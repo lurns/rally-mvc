@@ -1,6 +1,7 @@
 package org.launchcode.rallymvc.models;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.launchcode.rallymvc.models.data.MessageDao;
 import org.launchcode.rallymvc.models.data.MessageType;
 
 import javax.persistence.*;
@@ -70,4 +71,5 @@ public class Message {
     public void setUser(User user) {
         this.user = user;
     }
+
 }
