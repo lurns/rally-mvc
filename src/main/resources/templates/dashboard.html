@@ -15,7 +15,7 @@
                 <span th:unless="${user.pic}" th:text="${user.nickname}"></span>
             </div>
             <div th:if="${user.pic}" class="mx-auto img-fluid user-pic-main">
-                <img th:if="${user.pic}" src="'uploads/' + ${user.pic}" width="200" class="user-pic-main-display" th:src="@{'uploads/' + ${user.pic}}" />
+                <img th:if="${user.pic}" src="'uploads/' + ${user.pic}" class="user-pic-main-display" th:src="@{'uploads/' + ${user.pic}}" />
             </div>
             <div class="text-center">
             <form th:action="@{/upload-pic}" method="post" enctype="multipart/form-data">

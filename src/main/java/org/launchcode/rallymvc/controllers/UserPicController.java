@@ -36,19 +36,46 @@ public class UserPicController {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 
-        try{
-            String ext = pic.getOriginalFilename().substring(pic.getOriginalFilename().lastIndexOf(".") + 1);
+        Integer id = user.getId();
+        String ext = "." + pic.getOriginalFilename().substring(pic.getOriginalFilename().lastIndexOf(".") + 1);
 
-            Path fileNameAndPath = Paths.get(uploadDirectory,pic.getOriginalFilename());
+        try {
+            if (user.getPic() != null || !user.getPic().isEmpty()) {
+                Path jpgPath = Paths.get(uploadDirectory, id.toString() + ".jpg");
+                Path jpegPath = Paths.get(uploadDirectory, id.toString() + ".jpeg");
+                Path pngPath = Paths.get(uploadDirectory, id.toString() + ".png");
+                Files.deleteIfExists(jpgPath);
+                Files.deleteIfExists(jpegPath);
+                Files.deleteIfExists(pngPath);
+            }
 
-            user.setPic(pic.getOriginalFilename());
+            Path path = Paths.get(uploadDirectory, id.toString() + ext);
+
+            Files.copy(pic.getInputStream(),path);
+            user.setPic(id.toString() + ext);
             userDao.save(user);
-
-            Files.write(fileNameAndPath, pic.getBytes());
-         } catch (IOException e) {
+        } catch (IOException e) {
             return "redirect:/dashboard";
         }
         return "redirect:/dashboard";
+
+//        try{
+//            String ext = pic.getOriginalFilename().substring(pic.getOriginalFilename().lastIndexOf(".") + 1);
+//
+//            if (ext != "png" || ext != "jpg" || ext != "jpeg") {
+//                return "redirect:/dashboard";
+//            }
+//
+//            Path fileNameAndPath = Paths.get(uploadDirectory,pic.getOriginalFilename());
+//
+//            user.setPic(pic.getOriginalFilename());
+//            userDao.save(user);
+//
+//            Files.write(fileNameAndPath, pic.getBytes());
+//         } catch (IOException e) {
+//            return "redirect:/dashboard";
+//        }
+//        return "redirect:/dashboard";
     }
 
 }

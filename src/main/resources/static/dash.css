@@ -86,9 +86,9 @@ nav a .navbar-brand {
 }
 
 .user-pic-main {
-    border-radius: 50%;
     width: 200px;
     height: 200px;
+    border-radius: 50%;
     text-align: center;
     margin: 10px;
     overflow: hidden;
