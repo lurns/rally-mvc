@@ -8,7 +8,7 @@
     <div class="dash row">
         <div class="user-stats col-md-6 col-lg-4">
             <h1 class="text-center">Hi there, <span th:text="${user.nickname}"></span></h1>
-            <div id="message-bubble">
+            <div id="message-bubble" th:if="${recentWorkout}">
                 <p th:if="${currentMessage}" th:text="${currentMessage.msg}"></p>
             </div>
             <div th:unless="${user.pic}" class="user-pic-default mx-auto img-fluid">
