@@ -11,7 +11,11 @@
                 <span th:unless="${user.pic}" th:text="${user.nickname}"></span>
             </div>
             <div th:if="${user.pic}" class="mx-auto img-fluid user-pic-main">
-                <img th:if="${user.pic}" src="'uploads/' + ${user.pic}" class="user-pic-main-display" th:src="@{'uploads/' + ${user.pic}}" />
+                    <img th:if="${user.pic}" src="'uploads/' + ${user.pic}" class="user-pic-main-display" th:src="@{'uploads/' + ${user.pic}}" />
+                <div id="change-pic-container">
+                    <button type="button" id="change-pic-button" class="btn btn-link btn-sm edit-profile" data-toggle="modal"
+                            th:attr="data-target='#change-pic-modal'+${user.id}"><i class="far fa-edit"></i></button>
+                </div>
             </div>
             <div class="text-center">
                 <form th:action="@{/upload-pic}" method="post" enctype="multipart/form-data">
@@ -27,19 +31,24 @@
         <div class="col-md-8">
             <h1 th:text="${user.nickname}"></h1>
             <button type="button" id="change-nickname-button" class="btn btn-link btn-sm edit-profile" data-toggle="modal"
-                    th:attr="data-target='#edit-nickname-modal'+${user.id}">
-                change nickname
+                    th:attr="data-target='#change-nickname-modal'+${user.id}">
+                <i class="far fa-edit"></i>
             </button>
             <h5 th:text="${user.email}"></h5>
             <button type="button" id="change-email-button" class="btn btn-link btn-sm edit-profile" data-toggle="modal"
-                    th:attr="data-target='#edit-nickname-modal'+${user.id}">
-                change email
+                    th:attr="data-target='#change-email-modal'+${user.id}">
+                <i class="far fa-edit"></i>
             </button>
+            <h5>Change Password</h5><button type="button" id="change-email-button" class="btn btn-link btn-sm edit-profile" data-toggle="modal"
+                                            th:attr="data-target='#change-email-modal'+${user.id}">
+            <i class="far fa-edit"></i>
+        </button>
         </div>
     </div>
 </div>
 
 <div th:replace="fragments :: scripts"></div>
+<div th:replace="fragments :: croppie"></div>
 </body>
 <footer th:replace="fragments :: footer"></footer>
 </html>

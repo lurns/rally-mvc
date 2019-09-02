@@ -102,6 +102,7 @@ nav a .navbar-brand {
     text-align: center;
     margin: 10px;
     overflow: hidden;
+    position: relative;
 }
 
 .user-pic-main-display {
@@ -194,6 +195,21 @@ nav a .navbar-brand {
     color: #419d78;
     text-decoration: none;
     margin: -10px 0px 30px -8px;
+}
+
+#change-pic-container {
+    position: absolute;
+    right: 30px;
+    bottom: 0px;
+}
+
+#change-pic-button {
+    color: rgba(65, 157, 120, 0.5);
+    font-size: 5em;
+}
+#change-pic-button:hover {
+    color: rgba(255, 255, 255, 1);
+    font-size: 5em;
 }
 
 #timeOutputId {
