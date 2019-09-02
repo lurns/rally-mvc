@@ -17,16 +17,6 @@
             <div th:if="${user.pic}" class="mx-auto img-fluid user-pic-main">
                 <img th:if="${user.pic}" src="'uploads/' + ${user.pic}" class="user-pic-main-display" th:src="@{'uploads/' + ${user.pic}}" />
             </div>
-            <div class="text-center">
-            <form th:action="@{/upload-pic}" method="post" enctype="multipart/form-data">
-                <div class="custom-file">
-                    <input type="file" path="pic" class="custom-file-input" name="pic" th:id="pic"
-                           accept=".gif,.jpg,.png, image/*"/>
-                    <label class="custom-file-label" th:for="pic">Choose file...</label>
-                    <input type="submit" class="btn btn-link upload-button" value="Upload"/>
-                </div>
-            </form>
-            </div>
             <div th:if="${recentWorkout}" class="text-center recent-workout">
                 <h4>Last Workout</h4>
                 <p><span th:text="${recentWorkout.type}" class="highlight"></span> for <span th:text="${recentWorkout.time} + ' minutes'" class="highlight"></span></p>

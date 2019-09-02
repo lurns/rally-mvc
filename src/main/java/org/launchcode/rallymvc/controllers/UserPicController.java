@@ -58,24 +58,6 @@ public class UserPicController {
             return "redirect:/dashboard";
         }
         return "redirect:/dashboard";
-
-//        try{
-//            String ext = pic.getOriginalFilename().substring(pic.getOriginalFilename().lastIndexOf(".") + 1);
-//
-//            if (ext != "png" || ext != "jpg" || ext != "jpeg") {
-//                return "redirect:/dashboard";
-//            }
-//
-//            Path fileNameAndPath = Paths.get(uploadDirectory,pic.getOriginalFilename());
-//
-//            user.setPic(pic.getOriginalFilename());
-//            userDao.save(user);
-//
-//            Files.write(fileNameAndPath, pic.getBytes());
-//         } catch (IOException e) {
-//            return "redirect:/dashboard";
-//        }
-//        return "redirect:/dashboard";
     }
 
 }

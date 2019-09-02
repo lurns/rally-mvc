@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: dash-head"></head>
+
+<body>
+<nav th:replace="fragments :: navigation"></nav>
+<div class="container-fluid">
+    <div class="profile row">
+        <div class="col-md-4">
+            <div th:unless="${user.pic}" class="user-pic-default mx-auto img-fluid">
+                <span th:unless="${user.pic}" th:text="${user.nickname}"></span>
+            </div>
+            <div th:if="${user.pic}" class="mx-auto img-fluid user-pic-main">
+                <img th:if="${user.pic}" src="'uploads/' + ${user.pic}" class="user-pic-main-display" th:src="@{'uploads/' + ${user.pic}}" />
+            </div>
+            <div class="text-center">
+                <form th:action="@{/upload-pic}" method="post" enctype="multipart/form-data">
+                    <div class="custom-file">
+                        <input type="file" path="pic" class="custom-file-input" name="pic" th:id="pic"
+                               accept=".gif,.jpg,.png, image/*"/>
+                        <label class="custom-file-label" th:for="pic">Choose file...</label>
+                        <input type="submit" class="btn btn-link upload-button" value="Upload"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <h1 th:text="${user.nickname}"></h1>
+            <button type="button" id="change-nickname-button" class="btn btn-link btn-sm edit-profile" data-toggle="modal"
+                    th:attr="data-target='#edit-nickname-modal'+${user.id}">
+                change nickname
+            </button>
+            <h5 th:text="${user.email}"></h5>
+            <button type="button" id="change-email-button" class="btn btn-link btn-sm edit-profile" data-toggle="modal"
+                    th:attr="data-target='#edit-nickname-modal'+${user.id}">
+                change email
+            </button>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments :: scripts"></div>
+</body>
+<footer th:replace="fragments :: footer"></footer>
+</html>

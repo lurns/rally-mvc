@@ -34,6 +34,16 @@ nav a .navbar-brand {
     font-weight: 700;
 }
 
+.user-pic-nav {
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    margin: 8px 15px;
+    overflow: hidden;
+    display:block;
+    border: 3px #63b4bd solid;
+}
+
 .navbar .nav-user {
     color: #f2af29;
 }
@@ -176,6 +186,16 @@ nav a .navbar-brand {
     cursor: pointer;
 }
 
+.profile {
+    padding-top: 30px;
+}
+
+.edit-profile, .edit-profile:hover {
+    color: #419d78;
+    text-decoration: none;
+    margin: -10px 0px 30px -8px;
+}
+
 #timeOutputId {
     padding: 10px 0 0 0;
 }
@@ -215,7 +235,7 @@ nav a .navbar-brand {
     text-decoration: none;
 }
 
-.table tr td .edit-item {
+.edit-item {
     font-size: .8em;
     color: #419d78;
     text-decoration: none;
