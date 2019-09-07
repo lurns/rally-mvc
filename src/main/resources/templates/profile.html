@@ -50,16 +50,49 @@
                     th:attr="data-target='#change-nickname-modal'+${user.id}">
                 <i class="far fa-edit"></i>
             </button>
+            <!--Change email-->
             <h5 th:text="${user.email}"></h5>
             <button type="button" id="change-email-button" class="btn btn-link btn-sm edit-profile" data-toggle="modal"
                     th:attr="data-target='#change-email-modal'+${user.id}">
                 <i class="far fa-edit"></i>
             </button>
+            <div class="modal fade" th:id="'change-email-modal'+${user.id}" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Change Email</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" th:action="@{profile/change-email}" th:object="${user}" th:id="${user}">
+                                <div class="form-group">
+                                    <label th:for="currentemail">Current Email</label>
+                                    <input type="email" disabled="disabled" class="form-control" name="currentemail" th:value="${user.email}" />
+                                </div>
+                                <div class="form-group">
+                                    <label th:for="newpassword">New Email</label>
+                                    <input type="email" class="form-control" name="newemail" />
+                                </div>
+                                <div class="form-group">
+                                    <label th:for="password">Password</label>
+                                    <input type="password" class="form-control" name="password" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" name="id" th:value="${user.id}"/>
+                                    <input type="submit" class="form-control btn btn-outline-info add-button-message" value="Submit" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Change Password-->
             <h5>Change Password</h5><button type="button" id="change-password-button" class="btn btn-link btn-sm edit-profile" data-toggle="modal"
                                             th:attr="data-target='#change-password-modal'+${user.id}">
             <i class="far fa-edit"></i>
         </button>
-            <!--Change Password Modal-->
             <div class="modal fade" th:id="'change-password-modal'+${user.id}" role="dialog" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">

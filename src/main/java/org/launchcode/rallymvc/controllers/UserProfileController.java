@@ -1,5 +1,6 @@
 package org.launchcode.rallymvc.controllers;
 
+import org.hibernate.validator.constraints.Email;
 import org.launchcode.rallymvc.models.User;
 import org.launchcode.rallymvc.models.data.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 @Controller
 public class UserProfileController {
@@ -38,7 +40,6 @@ public class UserProfileController {
                                         HttpServletRequest request) {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        User checkUser = userDao.findOne(id);
 
         if (user.getId() == id) {
             if (user.getPassword().equals(currentpassword) || BCrypt.checkpw(currentpassword, user.getPassword())) {
@@ -49,6 +50,25 @@ public class UserProfileController {
                 } else {
                     return "redirect:/dashboard";
                 }
+            } else {
+                return "redirect:/dashboard";
+            }
+        } else {
+            return "redirect:/";
+        }
+    }
+
+    @RequestMapping(value = "profile/change-email", method = RequestMethod.POST)
+    public String processChangeEmail(@RequestParam @Email String newemail, @RequestParam String password,
+                                     @RequestParam int id, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+
+        if (user.getId() == id) {
+            if (user.getPassword().equals(password) || BCrypt.checkpw(password, user.getPassword())) {
+                user.setEmail(newemail);
+                userDao.save(user);
+                return "redirect:/profile";
             } else {
                 return "redirect:/dashboard";
             }
