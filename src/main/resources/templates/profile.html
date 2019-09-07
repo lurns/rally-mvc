@@ -15,17 +15,33 @@
                 <div id="change-pic-container">
                     <button type="button" id="change-pic-button" class="btn btn-link btn-sm edit-profile" data-toggle="modal"
                             th:attr="data-target='#change-pic-modal'+${user.id}"><i class="far fa-edit"></i></button>
-                </div>
-            </div>
-            <div class="text-center">
-                <form th:action="@{/upload-pic}" method="post" enctype="multipart/form-data">
-                    <div class="custom-file">
-                        <input type="file" path="pic" class="custom-file-input" name="pic" th:id="pic"
-                               accept=".gif,.jpg,.png, image/*"/>
-                        <label class="custom-file-label" th:for="pic">Choose file...</label>
-                        <input type="submit" class="btn btn-link upload-button" value="Upload"/>
+                    <!--Change Pic Modal-->
+                    <div class="modal crop-modal" th:id="'change-pic-modal'+${user.id}" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Change Photo</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!--TODO: Preview & crop photo before sending form to upload??-->
+                                    <form th:action="@{/upload-pic}" method="post" enctype="multipart/form-data">
+                                        <div class="custom-file">
+                                            <input type="file" path="pic" class="custom-file-input" name="pic" th:id="pic"
+                                                   accept=".gif,.jpg,.png, image/*" />
+                                            <label class="custom-file-label" th:for="pic">Choose file...</label>
+                                            <input type="submit" class="btn btn-link upload-button" value="upload new profile picture"/>
+                                        </div>
+                                    </form>
+                                <div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
         <div class="col-md-8">
@@ -39,7 +55,7 @@
                     th:attr="data-target='#change-email-modal'+${user.id}">
                 <i class="far fa-edit"></i>
             </button>
-            <h5>Change Password</h5><button type="button" id="change-email-button" class="btn btn-link btn-sm edit-profile" data-toggle="modal"
+            <h5>Change Password</h5><button type="button" id="change-password-button" class="btn btn-link btn-sm edit-profile" data-toggle="modal"
                                             th:attr="data-target='#change-email-modal'+${user.id}">
             <i class="far fa-edit"></i>
         </button>
@@ -48,7 +64,6 @@
 </div>
 
 <div th:replace="fragments :: scripts"></div>
-<div th:replace="fragments :: croppie"></div>
 </body>
 <footer th:replace="fragments :: footer"></footer>
 </html>

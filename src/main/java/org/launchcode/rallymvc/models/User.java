@@ -2,6 +2,7 @@ package org.launchcode.rallymvc.models;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -97,4 +98,9 @@ public class User {
         this.workouts = workouts;
     }
 
+    public String encryptPass(String password) {
+        String pw_hash = BCrypt.hashpw(password, BCrypt.gensalt());
+
+        return pw_hash;
+    }
 }

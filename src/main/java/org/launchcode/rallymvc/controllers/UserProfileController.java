@@ -21,7 +21,7 @@ public class UserProfileController {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 
-        /*if no user, redirect to home*/
+        /*if no user, redirect to default home*/
         if (session.getAttribute("user") == null) {
             return "redirect:/";
         }

@@ -9,6 +9,7 @@ import org.launchcode.rallymvc.models.data.MessageType;
 import org.launchcode.rallymvc.models.data.UserDao;
 import org.launchcode.rallymvc.models.data.WorkoutDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -75,6 +76,7 @@ public class UserController {
         }
 
         //pass validation, ready to create user and make session
+        newUser.setPassword(newUser.encryptPass(newUser.getPassword()));
         userDao.save(newUser);
 
         HttpSession session = request.getSession();
@@ -103,7 +105,7 @@ public class UserController {
         User existingUser = userDao.findByEmail(checkUser.getEmail());
         if (existingUser != null) {
             exists = true;
-            if (checkUser.getPassword().equals(existingUser.getPassword())) {
+            if (checkUser.getPassword().equals(existingUser.getPassword()) || BCrypt.checkpw(checkUser.getPassword(), existingUser.getPassword())) {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", existingUser);
                 return "redirect:/dashboard";
@@ -233,8 +235,6 @@ public class UserController {
         model.addAttribute("workout", workout);
         return "dashboard";
     }
-
-    //profile get
 
 
 }

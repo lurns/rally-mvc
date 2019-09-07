@@ -208,7 +208,7 @@ nav a .navbar-brand {
     font-size: 5em;
 }
 #change-pic-button:hover {
-    color: rgba(255, 255, 255, 1);
+    color: rgba(255, 255, 255, 0.8);
     font-size: 5em;
 }
 
@@ -251,7 +251,7 @@ nav a .navbar-brand {
     text-decoration: none;
 }
 
-.edit-item {
+.edit-item, .edit-item:hover {
     font-size: .8em;
     color: #419d78;
     text-decoration: none;
