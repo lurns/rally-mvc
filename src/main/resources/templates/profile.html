@@ -56,9 +56,42 @@
                 <i class="far fa-edit"></i>
             </button>
             <h5>Change Password</h5><button type="button" id="change-password-button" class="btn btn-link btn-sm edit-profile" data-toggle="modal"
-                                            th:attr="data-target='#change-email-modal'+${user.id}">
+                                            th:attr="data-target='#change-password-modal'+${user.id}">
             <i class="far fa-edit"></i>
         </button>
+            <!--Change Password Modal-->
+            <div class="modal fade" th:id="'change-password-modal'+${user.id}" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Change Password</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" th:action="@{profile/change-password}" th:object="${user}" th:id="${user}">
+                                <div class="form-group">
+                                    <label th:for="currentpassword">Current Password</label>
+                                    <input type="password" class="form-control" name="currentpassword" />
+                                </div>
+                                <div class="form-group">
+                                    <label th:for="newpassword">New Password</label>
+                                    <input type="password" class="form-control" name="newpassword" />
+                                </div>
+                                <div class="form-group">
+                                    <label th:for="retypepassword">Re-type New Password</label>
+                                    <input type="password" class="form-control" name="retypepassword" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" name="id" th:value="${user.id}"/>
+                                    <input type="submit" class="form-control btn btn-outline-info add-button-message" value="Submit" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
