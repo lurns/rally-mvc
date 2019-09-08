@@ -35,10 +35,12 @@
                                     <div class="custom-file">
                                         <div class="form-group">
                                             <label class="custom-file-label" th:for="pic">Choose file...</label>
-                                            <input type="file" path="pic" class="form-control-file custom-file-input" name="pic" th:id="pic"
-                                                   accept=".gif,.jpg,.png, image/*" />
-                                            <input type="hidden" name="baseImage" value=""/>
-                                            <input type="submit" name="imageUpload" class="btn btn-link upload-button" value="upload"/>
+                                            <input type="file" path="pic" class="form-control-file custom-file-input"
+                                                   name="pic" th:id="pic" accept=".gif,.jpg,.png, image/*" />
+                                            <input type="hidden" id="baseImage" name="baseImage" />
+                                            <input type="hidden" name="id" th:value="${user.id}" />
+                                            <button id="imageUpload" type="button" name="imageUpload"
+                                                    class="form-control btn btn-outline-info add-button-message">upload</button>
                                         </div>
                                     </div>
                                 </form>
@@ -174,6 +176,8 @@
 <script type="text/javascript" th:inline="javascript">
     // show image on file selection
     var reader = new FileReader();
+    var file;
+
     reader.onload = function(r_event) {
       document.getElementById('change-image').setAttribute('src', r_event.target.result);
     }
@@ -181,6 +185,9 @@
     document.getElementsByName('pic')[0].addEventListener('change', function(event) {
         $('#change-image-container').show();
         reader.readAsDataURL(this.files[0]);
+        console.log('File set');
+        file = this.files[0];
+        console.log(file);
     });
 
     reader.onloadend = function(o) {
@@ -196,30 +203,28 @@
             }
         });
 
+        console.log('Croppie set');
+
         // display croppie
-        $('.crop-modal').on('shown.bs.modal', function(){
             c.croppie('bind', {
-                url: reader.readAsDataURL($('change-image').attr('src')),
+                url: $('#change-image').attr('src'),
             });
+            console.log('Croppie bound');
 
-            console.log('for full image url ' + $('#change-image').prop('src') );
-            console.log('for rel image url ' + $('#change-image').attr('src') );
+        $('#imageUpload').on('click', function(){
+            c.croppie('result', {
+                type: 'base64',
+                format: 'png',
+                size: { width: 200, height: 200 }
+            })
+            .then(function(b64String) {
+                $('#baseImage').val(b64String);
+                $('#img-form').submit();
 
-            $('#croppie-upload').click(function() {
-                c.croppie("result", {
-                  type: "base64",
-                  format: "jpeg",
-                  size: { width: 200, height: 200 }
-                })
-                .then(function(resp) {
-                  $('#img-form').find('name=["imageUpload"]').val(resp);
-                });
             });
         });
 
     }
-
-
 </script>
 </body>
 <footer th:replace="fragments :: footer"></footer>
