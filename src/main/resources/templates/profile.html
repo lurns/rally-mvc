@@ -12,32 +12,38 @@
             </div>
             <div th:if="${user.pic}" class="mx-auto img-fluid user-pic-main">
                     <img th:if="${user.pic}" src="'uploads/' + ${user.pic}" class="user-pic-main-display" th:src="@{'uploads/' + ${user.pic}}" />
-                <div id="change-pic-container">
-                    <button type="button" id="change-pic-button" class="btn btn-link btn-sm edit-profile" data-toggle="modal"
-                            th:attr="data-target='#change-pic-modal'+${user.id}"><i class="far fa-edit"></i></button>
-                    <!--Change Pic Modal-->
-                    <div class="modal crop-modal" th:id="'change-pic-modal'+${user.id}" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Change Photo</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+            </div>
+            <!-- Change Pic -->
+            <div id="change-pic-container">
+                <button type="button" id="change-pic-button" class="btn btn-link btn-sm edit-profile" data-toggle="modal"
+                        th:attr="data-target='#change-pic-modal'+${user.id}"><i class="far fa-edit"></i></button>
+                <div class="modal crop-modal text-center" th:id="'change-pic-modal'+${user.id}" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Change Photo</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!--TODO: Preview & crop photo before sending form to upload??-->
+                                <div id="change-image-container">
+                                    <img src="" id="change-image" />
                                 </div>
-                                <div class="modal-body">
-                                    <!--TODO: Preview & crop photo before sending form to upload??-->
-                                    <form th:action="@{/upload-pic}" method="post" enctype="multipart/form-data">
-                                        <div class="custom-file">
-                                            <input type="file" path="pic" class="custom-file-input" name="pic" th:id="pic"
-                                                   accept=".gif,.jpg,.png, image/*" />
+                                <form th:action="@{/upload-pic}" method="post" id="img-form" enctype="multipart/form-data">
+                                    <div class="custom-file">
+                                        <div class="form-group">
                                             <label class="custom-file-label" th:for="pic">Choose file...</label>
-                                            <input type="submit" class="btn btn-link upload-button" value="upload new profile picture"/>
+                                            <input type="file" path="pic" class="form-control-file custom-file-input" name="pic" th:id="pic"
+                                                   accept=".gif,.jpg,.png, image/*" />
+                                            <input type="hidden" name="baseImage" value=""/>
+                                            <input type="submit" name="imageUpload" class="btn btn-link upload-button" value="upload"/>
                                         </div>
-                                    </form>
+                                    </div>
+                                </form>
                                 <div>
                                 </div>
-                            </div>
                             </div>
                         </div>
                     </div>
@@ -164,6 +170,57 @@
 </div>
 
 <div th:replace="fragments :: scripts"></div>
+<script src="croppie.min.js"></script>
+<script type="text/javascript" th:inline="javascript">
+    // show image on file selection
+    var reader = new FileReader();
+    reader.onload = function(r_event) {
+      document.getElementById('change-image').setAttribute('src', r_event.target.result);
+    }
+
+    document.getElementsByName('pic')[0].addEventListener('change', function(event) {
+        $('#change-image-container').show();
+        reader.readAsDataURL(this.files[0]);
+    });
+
+    reader.onloadend = function(o) {
+         // set up croppie
+        var c = $('#change-image').croppie({
+            viewport: {
+                width: 200,
+                height: 200,
+            },
+            boundary: {
+                width: 300,
+                height: 300
+            }
+        });
+
+        // display croppie
+        $('.crop-modal').on('shown.bs.modal', function(){
+            c.croppie('bind', {
+                url: reader.readAsDataURL($('change-image').attr('src')),
+            });
+
+            console.log('for full image url ' + $('#change-image').prop('src') );
+            console.log('for rel image url ' + $('#change-image').attr('src') );
+
+            $('#croppie-upload').click(function() {
+                c.croppie("result", {
+                  type: "base64",
+                  format: "jpeg",
+                  size: { width: 200, height: 200 }
+                })
+                .then(function(resp) {
+                  $('#img-form').find('name=["imageUpload"]').val(resp);
+                });
+            });
+        });
+
+    }
+
+
+</script>
 </body>
 <footer th:replace="fragments :: footer"></footer>
 </html>

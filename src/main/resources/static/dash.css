@@ -199,8 +199,12 @@ nav a .navbar-brand {
 
 #change-pic-container {
     position: absolute;
-    right: 30px;
-    bottom: 0px;
+    right: 150px;
+    bottom: 75px;
+}
+
+#change-image-container {
+    display: none;
 }
 
 #change-pic-button {
