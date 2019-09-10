@@ -318,3 +318,11 @@ footer {
     text-align: center;
     padding-top: 10px;
 }
+
+@media only screen and (max-width: 768px) {
+    .add-stuff {
+        border-top: #f2af29 1px solid;
+        border-left: 0px;
+        padding: 20px;
+    }
+  }
