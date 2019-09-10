@@ -30,22 +30,32 @@ nav a:hover {
     color: #419d78;
 }
 
-nav a .navbar-brand {
-    font-weight: 700;
+.navbar-brand {
+    font-weight: 400;
 }
 
 .user-pic-nav {
     border-radius: 50%;
     height: 30px;
     width: 30px;
-    margin: 8px 15px;
+    margin: 6px;
     overflow: hidden;
-    display:block;
+    display:inline;
     border: 3px #63b4bd solid;
 }
 
-.navbar .nav-user {
+.navbar .navbar-text .nav-user, .navbar .navbar-text .nav-user:hover {
     color: #f2af29;
+    padding-right: 20px;
+    font-size: 1.05em;
+    display: inline;
+}
+
+.navbar .navbar-text .nav-logout, .navbar .navbar-text .nav-logout:hover {
+    color: #63b4bd;
+    padding-right: 20px;
+    font-size: 1.05em;
+    display: inline;
 }
 
 .dash {
