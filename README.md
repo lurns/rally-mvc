@@ -17,14 +17,13 @@ and view how close they are to achieving that goal.
 * Thymeleaf
 * Bootstrap
 * JavaScript
-* MongoDB
+* croppie.js
 
 ### What I'll Have to Learn
 * User uploads & image cropping (Croppie.js)
-* Manipulate image?
 * Tracking time between workouts for appropriate reminders
-* Github Pages
-* MongoDB
+* Bootstrap modals
+* Deployment
 * Pagination
 * Storing/removing sessions
 
